@@ -17,7 +17,7 @@ jobs:
           deno-version: v1.42.1
 
       - name: Build
-        run: deno run -A https://deno.land/x/lume/mod.ts build
+        run: deno task build
 
       - name: Debug
         run: ls -la
