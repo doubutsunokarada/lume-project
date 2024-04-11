@@ -1,0 +1,23 @@
+name: Project Builder
+on:
+  push:
+    branches:
+      - main
+jobs:
+  lume-build:
+    name: Lume Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.42.1
+
+      - name: Build
+        run: deno run -A https://deno.land/x/lume/mod.ts build
+
+      - name: Debug
+        run: ls -la
