@@ -2,7 +2,7 @@ name: Project Builder
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   lume-build:
     name: Lume Build
