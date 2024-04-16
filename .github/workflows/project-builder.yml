@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  TARGET_FILE: "_site/**/*.html"
+  TARGET_FILE: "_output/**/*.html"
 
 jobs:
   lume-build:
