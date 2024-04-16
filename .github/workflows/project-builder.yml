@@ -32,4 +32,4 @@ jobs:
         run: npx prettier --write ${{ env.TARGET_FILE }}
 
       - name: debug
-        run: cat -A ./_site/index.html
+        run: cat -A ./_output/index.html
