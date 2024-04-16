@@ -21,4 +21,4 @@ jobs:
 
       - name: Format
         # uses: ./.github/code-formatting.yml
-        run: ls -la && pwd
+        run: ls -la && ls .github && pwd
