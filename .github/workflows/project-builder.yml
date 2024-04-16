@@ -21,7 +21,7 @@ jobs:
           deno-version: v1.42.1
 
       - name: Build
-        run: deno task build
+        run: deno task lume --dest _output
 
       - name: Setup Node
         uses: actions/setup-node@v4
