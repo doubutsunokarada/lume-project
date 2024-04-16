@@ -20,5 +20,4 @@ jobs:
         run: deno task build
 
       - name: Format
-        # uses: ./.github/code-formatting.yml
-        run: ls -la && ls .github && pwd
+        uses: ./.github/workflows/code-formatting.yml
