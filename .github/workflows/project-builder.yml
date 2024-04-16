@@ -3,9 +3,13 @@ on:
   push:
     branches:
       - main
+
+env:
+  TARGET_FILE: "_site/**/*.html"
+
 jobs:
   lume-build:
-    name: Lume Build
+    name: Lume Build & Format
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,5 +23,13 @@ jobs:
       - name: Build
         run: deno task build
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/Iron"
+
       - name: Format
-        uses: ./.github/workflows/code-formatting.yml
+        run: npm i --no-save prettier && npx prettier --write ${{ env.TARGET_FILE }}
+
+      - name: debug
+        run: cat -A ./_site/index.html
