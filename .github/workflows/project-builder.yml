@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+permissions:
+  pull-requests: write
+
 env:
   TARGET_FILE: "_output/**/*.html"
 
