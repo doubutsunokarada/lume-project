@@ -47,8 +47,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git switch -c output/${{ env.CURRENT_DATETIME }}
-          git push -u origin output/${{ env.CURRENT_DATETIME }}
+          git switch -c build/${{ env.CURRENT_DATETIME }}
+          git push -u origin build/${{ env.CURRENT_DATETIME }}
 
       - name: Add and Commit
         uses: EndBug/add-and-commit@v9
