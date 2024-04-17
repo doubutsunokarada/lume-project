@@ -55,6 +55,7 @@ jobs:
         run: |
           git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
           git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+          git status
           git add _output
           git commit -m "commit date: ${{ env.CURRENT_DATETIME }}"
           git push
