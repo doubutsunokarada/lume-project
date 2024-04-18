@@ -24,6 +24,14 @@ jobs:
         with:
           deno-version: v1.42.1
 
+      - name: Configure Git
+        run: |
+          git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+          git switch output
+          git merge --no-edit main
+          git push -u origin output
+
       - name: Build
         run: deno task lume --dest _output
 
@@ -54,8 +62,6 @@ jobs:
 
       - name: Add and Commit
         run: |
-          git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
-          git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
           git add _output
           git status
           git commit -m "commit date: ${{ env.CURRENT_DATETIME }}"
