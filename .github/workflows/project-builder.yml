@@ -8,9 +8,6 @@ permissions:
   contents: write
   pull-requests: write
 
-env:
-  TARGET_FILE: "*.html"
-
 jobs:
   lume-build:
     name: Lume Build & Format
@@ -44,6 +41,7 @@ jobs:
         working-directory: ${{ runner.temp }}/_output
         run: |
           pwd
+          ls -la
           npx prettier **/*.html --write
 
       - name: Set current datetime as env variable
