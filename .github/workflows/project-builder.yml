@@ -43,7 +43,7 @@ jobs:
           node-version: "lts/Iron"
 
       - name: Format
-        working-directory: _output
+        working-directory: ${{ env.TEMP_DIR_PATH }}/_output
         run: npx prettier ${{ env.TARGET_FILE }} --write
 
       - name: Set current datetime as env variable
