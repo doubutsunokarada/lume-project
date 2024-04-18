@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 
 env:
-  TARGET_FILE: "_output/**/*.html"
+  TARGET_FILE: "_output/*.html"
 
 jobs:
   lume-build:
@@ -29,12 +29,12 @@ jobs:
           git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
           git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
           git pull
-          git switch output
-          git merge --allow-unrelated-histories --no-edit main
-          git push -u origin output
 
       - name: Build
-        run: deno task lume --dest _output
+        run: |
+          deno task lume --dest _output
+          mkdir /temp
+          mv ./_output /temp
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -42,10 +42,7 @@ jobs:
           node-version: "lts/Iron"
 
       - name: Format
-        run: npx prettier ${{ env.TARGET_FILE }} --write
-
-      - name: debug
-        run: cat -A ./_output/index.html
+        run: npx prettier /temp/${{ env.TARGET_FILE }} --write
 
       - name: Set current datetime as env variable
         env:
@@ -58,8 +55,14 @@ jobs:
           BRANCH_NAME: build/${{ env.CURRENT_DATETIME }}
         run: |
           git branch
+          git switch output
           git switch -c ${{ env.BRANCH_NAME }}
           git push -u origin ${{ env.BRANCH_NAME }}
+
+      - name: Move _output back
+        run: |
+          rm -rf ./_output
+          mv /temp/_output .
 
       - name: Add and Commit
         run: |
