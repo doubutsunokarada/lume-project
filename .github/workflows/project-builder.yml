@@ -44,7 +44,7 @@ jobs:
 
       - name: Format
         working-directory: _output
-        run: npx prettier ${{ env.TEMP_DIR_PATH }}/${{ env.TARGET_FILE }} --write
+        run: npx prettier ${{ env.TARGET_FILE }} --write
 
       - name: Set current datetime as env variable
         env:
