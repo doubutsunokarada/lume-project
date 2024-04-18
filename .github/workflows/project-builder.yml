@@ -42,7 +42,7 @@ jobs:
 
       - name: Format
         working-directory: ${{ runner.temp }}/_output
-        run: npx prettier ${{ env.TARGET_FILE }} --write
+        run: npx prettier ./**/*.html --write
 
       - name: Set current datetime as env variable
         env:
