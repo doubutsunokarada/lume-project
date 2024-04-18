@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: |
           deno task lume --dest _output
-          mv ./_output ${{ runner.temp }}
+          mv ./_output ${{ runner.temp }}/_output
 
       - name: Setup Node
         uses: actions/setup-node@v4
