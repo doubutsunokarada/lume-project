@@ -10,7 +10,6 @@ permissions:
 
 env:
   TARGET_FILE: "*.html"
-  TEMP_DIR_PATH: "~/temp"
 
 jobs:
   lume-build:
@@ -34,8 +33,7 @@ jobs:
       - name: Build
         run: |
           deno task lume --dest _output
-          mkdir ${{ env.TEMP_DIR_PATH }}
-          mv ./_output ${{ env.TEMP_DIR_PATH }}
+          mv ./_output ${{ runner.temp }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -43,7 +41,7 @@ jobs:
           node-version: "lts/Iron"
 
       - name: Format
-        working-directory: ${{ env.TEMP_DIR_PATH }}/_output
+        working-directory: ${{ runner.temp }}/_output
         run: npx prettier ${{ env.TARGET_FILE }} --write
 
       - name: Set current datetime as env variable
@@ -64,7 +62,7 @@ jobs:
       - name: Move _output back
         run: |
           rm -rf ./_output
-          mv ${{ env.TEMP_DIR_PATH }}/_output .
+          mv ${{ runner.temp }}/_output .
 
       - name: Add and Commit
         run: |
