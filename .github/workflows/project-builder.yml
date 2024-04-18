@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 
 env:
-  TARGET_FILE: "_output/*.html"
+  TARGET_FILE: "*.html"
   TEMP_DIR_PATH: "~/temp"
 
 jobs:
@@ -43,6 +43,7 @@ jobs:
           node-version: "lts/Iron"
 
       - name: Format
+        working-directory: _output
         run: npx prettier ${{ env.TEMP_DIR_PATH }}/${{ env.TARGET_FILE }} --write
 
       - name: Set current datetime as env variable
