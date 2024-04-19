@@ -1,0 +1,19 @@
+name: Upload Artifact
+on:
+  push:
+    branches:
+      - output
+
+jobs:
+  save-artifact:
+    name: Save Artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Archive static files
+        uses: actions/upload-artifact@v4
+        with:
+          name: output
+          path: _output
