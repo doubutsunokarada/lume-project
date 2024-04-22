@@ -12,7 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
-      - name: Archive static files
+      - name: Archive output directory
+        run: |
+          zip -r ${{ runner.temp }}/_output.zip _output
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: output
